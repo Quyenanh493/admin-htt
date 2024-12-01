@@ -16,6 +16,8 @@ import Answer from "../pages/Quiz/Answer";
 import Login from "../pages/Login";
 import ProtectedRoute from "../components/ProtectedRoute";
 import Logout from "../pages/Logout";
+import Unauthorized from "../pages/Unauthorized";
+import Error404 from "../pages/Error404";
 
 
  export const routes = [
@@ -88,5 +90,13 @@ import Logout from "../pages/Logout";
     {
         path: "/login",
         element: <Login />
+    },
+    {
+        path: "/unauthorized",
+        element: <Unauthorized />
+    },
+    {
+        path: "*",
+        element: <Error404 />
     },
  ]; 

@@ -15,22 +15,33 @@ function Login() {
 
     const handleLoginSubmit = async (values) => {
         setSpinning(true);
-        const response = await login(values);
-
-        if (response.accessToken) {
-            setCookie("accessToken", response.accessToken, 1);
-            notiApi.success({
-                message: "Đăng nhập thành công",
-                description: `Bạn đã đăng nhập thành công.`,
-            });
-            navigate("/", { replace: true });
-        } else {
+        try {
+            const response = await login(values);
+    
+            if (response.accessToken) {
+                setCookie("accessToken", response.accessToken, 1);
+                setCookie("role", response.role, 1);
+                notiApi.success({
+                    message: "Đăng nhập thành công",
+                    description: "Bạn đã đăng nhập thành công.",
+                });
+                navigate("/", { replace: true });
+            } else {
+                notiApi.error({
+                    message: "Đăng nhập thất bại",
+                    description: "Thông tin đăng nhập không chính xác.",
+                });
+            }
+        } catch (error) {
             notiApi.error({
                 message: "Đăng nhập thất bại",
                 description: "Thông tin đăng nhập không chính xác.",
             });
+        } finally {
+            setSpinning(false);
         }
     };
+    
 
     return (
         <>

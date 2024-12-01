@@ -14,6 +14,7 @@ function LayoutDefault() {
     const navigate = useNavigate();
 
     const accessToken = getCookie("accessToken");
+    const role = getCookie("role");
     const handleLogout = () => {
         navigate("/logout");
     }
@@ -21,6 +22,11 @@ function LayoutDefault() {
     if (!accessToken) {
         return <Navigate to="/login" replace />;
     }
+
+    if (role !== "admin") {
+        return <Navigate to="/unauthorized" replace />;
+    }
+    
     return (
         <>
             <Layout className="layout-default">
