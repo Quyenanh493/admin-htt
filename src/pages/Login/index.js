@@ -25,7 +25,9 @@ function Login() {
                     message: "Đăng nhập thành công",
                     description: "Bạn đã đăng nhập thành công.",
                 });
-                navigate("/", { replace: true });
+                setTimeout(() => {
+                    navigate("/", { replace: true });
+                }, 3000);              
             } else {
                 notiApi.error({
                     message: "Đăng nhập thất bại",

@@ -1,14 +1,13 @@
-const API_DOMAIN = process.env.REACT_APP_API_DOMAIN; // Biến môi trường sẽ lấy từ Vercel
-
+const API_DOMAIN = "http://luuninh.somee.com/api/"
 
 export const get = async (path) => {
-  const response = await fetch(`${API_DOMAIN}${path}`);
+  const response = await fetch(API_DOMAIN + path);
   const result = await response.json();
   return result;
 }
 
 export const post = async (path, options) => {
-  const response = await fetch(`${API_DOMAIN}${path}`, {
+  const response = await fetch(API_DOMAIN + path, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -27,7 +26,7 @@ export const post = async (path, options) => {
 }
 
 export const del = async (path) => {
-  const response = await fetch(`${API_DOMAIN}${path}`, {
+  const response = await fetch(API_DOMAIN + path, {
     method: "DELETE"
   });
   const result = await response.status;
@@ -35,7 +34,7 @@ export const del = async (path) => {
 }
 
 export const patch = async (path, options) => {
-  const response = await fetch(`${API_DOMAIN}${path}`, {
+  const response = await fetch(API_DOMAIN + path, {
     method: "PATCH",
     headers: {
       Accept: "application/json",
@@ -48,7 +47,7 @@ export const patch = async (path, options) => {
 }
 
 export const put = async (path, options) => {
-  const response = await fetch(`${API_DOMAIN}${path}`, {
+  const response = await fetch(API_DOMAIN + path, {
     method: "PUT",
     headers: {
       Accept: "application/json",
@@ -67,7 +66,7 @@ export const put = async (path, options) => {
 }
 
 export const postFormData = async (path, formData) => {
-  const response = await fetch(`${API_DOMAIN}${path}`, {
+  const response = await fetch(API_DOMAIN + path, {
     method: "POST",
     headers: {
       Accept: "*/*",
