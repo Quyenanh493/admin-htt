@@ -89,7 +89,7 @@ function EditCategory(props) {
             <Modal
                 open={showModal}
                 onCancel={handleCancel}
-                title="Chỉnh sửa khóa học"
+                title="Chỉnh sửa danh mục"
                 footer={null}
             >
                 <Spin spinning={spinning}>

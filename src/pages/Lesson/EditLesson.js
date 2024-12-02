@@ -41,7 +41,7 @@ function EditLesson(props) {
         setTimeout(() => {
             if (response) {
                 notiApi.success({
-                    message: "Sửa thành công"
+                    message: "Sửa thành công",
                 });
                 form.resetFields();
                 setShowModal(false);
@@ -49,7 +49,7 @@ function EditLesson(props) {
             }
             else {
                 notiApi.error({
-                    message: "Thêm thất bại"
+                    message: "Sửa thất bại"
                 });
             }
             setSpinning(false);
@@ -88,9 +88,9 @@ function EditLesson(props) {
             {contextHolder}
             <Button type="primary"
                 icon={<EditOutlined />} style={{ marginRight: 10 }} onClick={handleShowModal} />
-            <Modal open={showModal} onCancel={handleCancel} title="Chỉnh sửa khóa học" footer={null}>
+            <Modal open={showModal} onCancel={handleCancel} title="Chỉnh sửa bài giảng" footer={null}>
                 <Spin spinning={spinning} >
-                <h1>Thêm video mới</h1>
+                <h1>Thêm bài giảng mới</h1>
                 <Form layout="vertical" name='CreateLesson' onFinish={handleFormSubmit} form={form} initialValues={record}>
                     <Form.Item
                         name="courseId"

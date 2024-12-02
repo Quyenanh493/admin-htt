@@ -53,7 +53,7 @@ function EditInstructor(props) {
             {contextHolder}
             <Button type="primary"
                 icon={<EditOutlined />} style={{ marginRight: 10 }} onClick={handleShowModal} />
-            <Modal open={showModal} onCancel={handleCancel} title="Chỉnh sửa khóa học" footer={null}>
+            <Modal open={showModal} onCancel={handleCancel} footer={null}>
                 <Spin spinning={spinning} >
                 <Form layout="vertical" name='CreateInstructor' onFinish={handleFormSubmit} form={form} initialValues={record}>
                     <Form.Item

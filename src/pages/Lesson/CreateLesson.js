@@ -74,9 +74,9 @@ function CreateLesson(props) {
         <>
             {contextHolder}
             <Button type="dashed" style={{ backgroundColor: 'green', borderColor: 'green', color: "white" }} icon={<PlusOutlined />} onClick={handleShowModal}>Thêm mới</Button>
-            <Modal open={showModal} onCancel={handleCancel} title="Chỉnh sửa khóa học" footer={null}>
+            <Modal open={showModal} onCancel={handleCancel} title="Thêm mới bài giảng" footer={null}>
                 <Spin spinning={spinning} >
-                <h1>Thêm video mới</h1>
+                <h1>Thêm bài giảng mới</h1>
                 <Form layout="vertical" name='CreateLesson' onFinish={handleFormSubmit} form={form}>
                     <Form.Item
                         name="courseId"

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Table, Row, Col, Input, Button } from 'antd';
+import { Table, Row, Col, Input, Button, Tooltip } from 'antd';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { getAllQuestion } from '../../services/questionService';
 import CreateQuestion from './CreateQuestion';
@@ -89,48 +89,52 @@ function Question() {
                 <div style={{ display: 'flex', gap: 8 }}>
                     <Button type="primary" icon={<EditOutlined />} style={{ marginBottom: 8 }} onClick={() => handleSelectRecord(record)} />
                     <DeleteQuestion record={record} onReload={handleReload} />
-                    <Button type="dashed" style={{ backgroundColor: 'blue', borderColor: 'blue', color: "white" }} icon={<FormOutlined />} onClick={() => handleMove(record)} />
+                    <Tooltip title="Xem câu trả lời của câu hỏi này">
+                        <Button type="dashed" style={{ backgroundColor: 'blue', borderColor: 'blue', color: "white" }} icon={<FormOutlined />} onClick={() => handleMove(record)} />
+                    </Tooltip>
                 </div>
             ),
         },
     ];
 
     return (
-        <div style={{ padding: '16px' }}>
-            <h1 style={{ textAlign: 'center' }}>Danh sách Câu hỏi</h1>
-            <Row justify="space-between" align="middle" gutter={[16, 16]} style={{ marginBottom: 16 }}>
-                <Col xs={24} sm={12} md={8}>
-                    <Search
-                        placeholder="Tìm kiếm theo nội dung..."
-                        style={{ width: '100%' }}
-                        value={searchText}
-                        enterButton
-                        onChange={(e) => handleSearch(e.target.value)}
-                        onSearch={handleSearch}
-                    />
-                </Col>
-                <Col xs={24} sm={12} md={6} style={{ textAlign: 'right' }}>
-                    <CreateQuestion quizData={quizData} onReload={handleReload} />
-                </Col>
-            </Row>
-            <Table
-                columns={columns}
-                dataSource={filteredQuestions}
-                bordered
-                rowKey="questionId"
-                scroll={{ x: 576 }}
-                pagination={{
-                    responsive: true,
-                }}
-            />
-            {isModalOpen && (
-                <EditQuestion
-                    record={selectedRecord}
-                    onReload={handleReload}
-                    onClose={handleCloseModal}
+        <>
+            <div style={{ padding: '16px' }}>
+                <h1 style={{ textAlign: 'center' }}>Danh sách Câu hỏi</h1>
+                <Row justify="space-between" align="middle" gutter={[16, 16]} style={{ marginBottom: 16 }}>
+                    <Col xs={24} sm={12} md={8}>
+                        <Search
+                            placeholder="Tìm kiếm theo nội dung..."
+                            style={{ width: '100%' }}
+                            value={searchText}
+                            enterButton
+                            onChange={(e) => handleSearch(e.target.value)}
+                            onSearch={handleSearch}
+                        />
+                    </Col>
+                    <Col xs={24} sm={12} md={6} style={{ textAlign: 'right' }}>
+                        <CreateQuestion quizData={quizData} onReload={handleReload} />
+                    </Col>
+                </Row>
+                <Table
+                    columns={columns}
+                    dataSource={filteredQuestions}
+                    bordered
+                    rowKey="questionId"
+                    scroll={{ x: 576 }}
+                    pagination={{
+                        responsive: true,
+                    }}
                 />
-            )}
-        </div>
+                {isModalOpen && (
+                    <EditQuestion
+                        record={selectedRecord}
+                        onReload={handleReload}
+                        onClose={handleCloseModal}
+                    />
+                )}
+            </div>
+        </>
     );
 }
 

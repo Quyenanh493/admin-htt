@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Row, Col, Input, Button } from 'antd';
+import { Table, Row, Col, Input, Button, Tooltip } from 'antd';
 import { getCourse } from '../../services/coursesService';
 import { getAllQuiz } from '../../services/quizService';
 import CreateQuiz from './CreateQuiz';
@@ -13,8 +13,8 @@ const { Search } = Input;
 function Quiz() {
     const [dataQuiz, setDataQuiz] = useState([]);
     const [dataCourse, setDataCourse] = useState([]);
-    const [filteredDataQuiz, setFilteredDataQuiz] = useState([]); 
-    const [searchText, setSearchText] = useState(''); 
+    const [filteredDataQuiz, setFilteredDataQuiz] = useState([]);
+    const [searchText, setSearchText] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
@@ -30,7 +30,7 @@ function Quiz() {
 
             const flatQuizs = quizs.flat();
             setDataQuiz(flatQuizs);
-            setFilteredDataQuiz(flatQuizs); 
+            setFilteredDataQuiz(flatQuizs);
         };
 
         fetchData();
@@ -46,13 +46,13 @@ function Quiz() {
 
         const flatLessons = lessons.flat();
         setDataQuiz(flatLessons);
-        setFilteredDataQuiz(flatLessons); 
+        setFilteredDataQuiz(flatLessons);
     };
 
     const handleSearch = (value) => {
         setSearchText(value);
         if (value.trim() === '') {
-            setFilteredDataQuiz(dataQuiz); 
+            setFilteredDataQuiz(dataQuiz);
         } else {
             setFilteredDataQuiz(
                 dataQuiz.filter(quiz =>
@@ -73,7 +73,7 @@ function Quiz() {
             dataIndex: 'quizId',
             key: 'quizId',
             width: '10%',
-            responsive: ['sm'], 
+            responsive: ['sm'],
         },
         {
             title: 'Tên Bài kiểm tra',
@@ -96,11 +96,13 @@ function Quiz() {
                 <div style={{ display: 'flex', gap: 8 }}>
                     <EditQuiz courses={dataCourse} record={record} onReload={handleReload} existingQuizzes={dataQuiz} />
                     <DeleteQuiz courses={dataCourse} record={record} onReload={handleReload} />
-                    <Button
-                        style={{ backgroundColor: 'orange', borderColor: 'orange', color: 'white' }}
-                        icon={<QuestionCircleOutlined />}
-                        onClick={() => handleMove(record)}
-                    />
+                    <Tooltip title="Xem câu hỏi của bài kiểm tra này">
+                        <Button
+                            style={{ backgroundColor: 'orange', borderColor: 'orange', color: 'white' }}
+                            icon={<QuestionCircleOutlined />}
+                            onClick={() => handleMove(record)}
+                        />
+                    </Tooltip>
                 </div>
             ),
         },
@@ -114,10 +116,10 @@ function Quiz() {
                     <Search
                         placeholder="Tìm kiếm theo tên bài kiểm tra..."
                         style={{ width: '100%' }}
-                        onSearch={handleSearch} 
-                        value={searchText} 
+                        onSearch={handleSearch}
+                        value={searchText}
                         enterButton
-                        onChange={(e) => handleSearch(e.target.value)} 
+                        onChange={(e) => handleSearch(e.target.value)}
                     />
                 </Col>
                 <Col xs={24} sm={12} md={6} style={{ textAlign: 'right' }}>
@@ -126,12 +128,12 @@ function Quiz() {
             </Row>
             <Table
                 columns={columns}
-                dataSource={filteredDataQuiz} 
+                dataSource={filteredDataQuiz}
                 bordered
                 rowKey="quizId"
                 scroll={{ x: 576 }}
                 pagination={{
-                    responsive: true, 
+                    responsive: true,
                 }}
             />
         </div>

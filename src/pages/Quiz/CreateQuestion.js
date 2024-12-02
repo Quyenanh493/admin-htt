@@ -53,7 +53,7 @@ function CreateQuestion(props) {
         <>
             {contextHolder}
             <Button type="dashed" style={{ backgroundColor: 'green', borderColor: 'green', color: "white" }} icon={<PlusOutlined />} onClick={handleShowModal}>Thêm mới</Button>
-            <Modal open={showModal} onCancel={handleCancel} title="Chỉnh sửa khóa học" footer={null}>
+            <Modal open={showModal} onCancel={handleCancel} footer={null}>
                 <Spin spinning={spinning} >
                 <h1>Thêm câu hỏi mới</h1>
                 <Form layout="vertical" name='CreateQuiz' onFinish={handleFormSubmit} form={form}>
