@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
-import { getProgress } from "../../services/dashboardService";
+import { getRevenue } from "../../services/dashboardService";
 
 function CountProgress() {
     const [dataPro, setDataPro] = useState([]);
-    const [countPro, setCountPro] = useState(0);
+    const [totalPro, setTotalPro] = useState(0);
 
     useEffect(() => {
         const fetchApi = async () => {
-            const response = await getProgress();
+            const response = await getRevenue();
             setDataPro(response);
-            setCountPro(response.length);
+            const total = response.reduce((sum, item) => sum + item.totalMember, 0)
+            setTotalPro(total);
         }
         fetchApi();
     }, [])
@@ -17,7 +18,7 @@ function CountProgress() {
     console.log(dataPro);
     return (
         <>
-            <h2 style={{ color: '#2db7f5' }}>{countPro}</h2>
+            <h2 style={{ color: '#2db7f5' }}>{totalPro}</h2>
         </>
     )
 }
